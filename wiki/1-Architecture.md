@@ -1,17 +1,25 @@
-# 1. Architecture
+# Architecture & System Design
 
-1. Capture: webcam + microphone in the browser, processed locally; nothing is uploaded by default.
-2. Signals: facial action units, gaze, blink rate, head pose, posture, voice pitch and energy.
-3. Interpretation: cue to possible-emotion mapping with confidence and at least two alternative explanations.
-4. Reflection: guided conversation and optional validated questionnaires (e.g. Big Five IPIP) for personality.
+This document details the system design, components, and communication topology of **AI Human Behavior & Emotion Interpreter**.
 
-## Proposed stack
-- Browser app (MediaPipe Tasks JS)
-- Python research notebook (py-feat, OpenFace)
-- LLM for the reflective conversation
+```mermaid
+flowchart TD
+    Client["Client / User Interface"] --> Core["Core Processing Engine"]
+    Core --> Ingestion["Data Ingestion & Adapters"]
+    Core --> Persistence["Storage / Cache Layer"]
+    Core --> Verification["Validation & Safety Layer"]
+```
 
-## Open bases to fork
-- [google-ai-edge/mediapipe](https://github.com/google-ai-edge/mediapipe) — Face and pose landmarks in real time.
-- [cosanlab/py-feat](https://github.com/cosanlab/py-feat) — Facial expression and action-unit analysis toolkit.
-- [TadasBaltrusaitis/OpenFace](https://github.com/TadasBaltrusaitis/OpenFace) — Action units, gaze and head pose.
-- [serengil/deepface](https://github.com/serengil/deepface) — Face analysis framework.
+## Core Subsystems
+
+### 1. Ingestion & Preprocessing
+Handles raw input data, validates schema compliance, normalizes inputs, and eliminates malformed requests.
+
+### 2. Processing & Business Logic
+Executes the primary business logic and domain processing pipelines efficiently and deterministically.
+
+### 3. Verification & Safety Guards
+Enforces safety rules, sanitizes data structures, and validates output integrity before presentation.
+
+### 4. Storage & State Management
+Maintains persistent state, caches hot queries, and guarantees data durability.
