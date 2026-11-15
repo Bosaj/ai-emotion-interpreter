@@ -2,7 +2,7 @@
 
 > A research-oriented tool that reads facial movements, gaze, posture and voice, and explains possible emotional cues with confidence levels — never verdicts.
 
-**Status:** pre-alpha scaffold (no code yet). **Feasibility rating:** 8/10 (owner's rating) — strong interest; scientific and legal limits must shape the design.
+**Status:** active implementation (`v0.1`–`v0.4` core engine in `src/emotion_ai` & `web/index.html`). **Feasibility rating:** 8/10 (owner's rating) — strong interest; scientific and legal limits must shape the design.
 **Idea:** #19 in the owner's ideas backlog. **Author:** Oussama Elhadji (`@Bosaj`) <oussousselhadji@gmail.com>.
 
 ---
@@ -56,8 +56,14 @@ This repo is a **scaffold**: README + standard files, no implementation yet. If 
 ## Getting started
 
 ```bash
-# nothing to run yet — this is a scaffold.
+PYTHONPATH=src python -m unittest discover -s tests -p "test_*.py" -v
 ```
+
+### Implemented Modules (`src/emotion_ai/core.py` & `web/index.html`)
+- `ConsentContext` & `MultimodalTimeline` — Explicit informed consent gate and EU AI Act Art. 5(1)(f) guardrail blocking hiring/workplace/school/surveillance uses.
+- `FacialMeshTracker` & `AudioSpectralAnalyzer` — Blink frequency / micro-motion detector + DFT spectral pitch variance and RMS vocal energy analyzer.
+- `CueHypothesisEngine` — Observable cue hypothesis generator returning calibrated confidence and >= 2 non-emotional alternative explanations (`Barrett et al., 2019`).
+- `IPIPBigFiveQuestionnaire` — Validated 50-item IPIP Big Five inventory with reverse-key scoring and reflective prompts + browser consent UI (`web/index.html`).
 
 ## 📄 License
 **Proprietary & Commercial Software License** — All Rights Reserved © 2026 Oussama Elhadji (`@Bosaj`) <[oussousselhadji@gmail.com](mailto:oussousselhadji@gmail.com)>.
